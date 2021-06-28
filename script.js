@@ -279,7 +279,7 @@ function draw() {
       music.bgmusic.pause();
       if (!lives) {
         
-          location.href = 'level2/index.html';
+          location.href = 'https://shauryasrivatava.github.io/Game/level2/';
         
         console.log("GAME OVER!! Try again...");
         // document.location.reload();
