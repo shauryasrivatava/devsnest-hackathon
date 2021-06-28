@@ -226,8 +226,9 @@ function collisionDetection() {
           score++;
           if (score === brickRowCount * brickColumnCount) {
             music.bgmusic.stop();
+            alert("Congratulations!! You've won!");
             location.href = 'https://shauryasrivatava.github.io/Game/level3/';
-            // alert("Congratulations!! You've won!");
+            
             // alert("Level 2");
             // levelup();
             brickColumnCount += 7;

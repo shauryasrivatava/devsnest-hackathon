@@ -4,8 +4,8 @@ let ctx = canvas.getContext("2d");
 let ballRadius = 10;
 let x = canvas.width / 2;
 let y = canvas.height - 10;
-let dx = 3;
-let dy = -3;
+let dx = 4;
+let dy = -4;
 //create the paddle
 let paddleHeight = 12;
 let paddleWidth = 72;
@@ -13,7 +13,7 @@ let paddleWidth = 72;
 let paddleX = (canvas.width - paddleWidth) / 2;
 let rightPressed = false;
 let leftPressed = false;
-let brickRowCount = 6;
+let brickRowCount = 8;
 let brickColumnCount = 7;
 let brickWidth = 72;
 let brickHeight = 24;
@@ -227,9 +227,12 @@ function collisionDetection() {
           if (score === brickRowCount * brickColumnCount) {
             music.bgmusic.stop();
             alert("Congratulations!! You've won!");
-            location.href = 'https://shauryasrivatava.github.io/Game/level4/';
+            location.href = 'https://shauryasrivatava.github.io/Game/level3/';
+            
+            // alert("Level 2");
+            // levelup();
             brickColumnCount += 7;
-            // document.location.reload();
+            
           }
         }
       }
@@ -276,6 +279,7 @@ function draw() {
       music.bgmusic.pause();
       if (!lives) {
         location.href = 'https://shauryasrivatava.github.io/Game/gameover/';
+
         // alert("GAME OVER!! Try again...");
         // document.location.reload();
       } else {
