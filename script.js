@@ -229,8 +229,8 @@ function collisionDetection() {
             music.bgmusic.stop();
             // alert("Congratulations!! You've won!");
             location.href = 'https://shauryasrivatava.github.io/Game/level2/';
-            brickColumnCount += 7;
-            document.location.reload();
+            // brickColumnCount += 7;
+            
           }
         }
       }

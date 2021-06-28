@@ -231,7 +231,7 @@ function collisionDetection() {
             // alert("Level 2");
             // levelup();
             brickColumnCount += 7;
-            document.location.reload();
+            
           }
         }
       }
