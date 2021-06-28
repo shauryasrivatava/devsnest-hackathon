@@ -227,10 +227,8 @@ function collisionDetection() {
           score++;
           if (score === brickRowCount * brickColumnCount) {
             music.bgmusic.stop();
-            alert("Congratulations!! You've won!");
-            
-            alert("Level 2");
-            levelup();
+            // alert("Congratulations!! You've won!");
+            location.href = 'https://shauryasrivatava.github.io/Game/level2/';
             brickColumnCount += 7;
             document.location.reload();
           }
@@ -278,9 +276,7 @@ function draw() {
       lives--;
       music.bgmusic.pause();
       if (!lives) {
-        
-          location.href = 'https://shauryasrivatava.github.io/Game/level2/';
-        
+        location.href = 'https://shauryasrivatava.github.io/Game/gameover/';
         console.log("GAME OVER!! Try again...");
         // document.location.reload();
       } else {

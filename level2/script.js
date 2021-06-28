@@ -226,9 +226,10 @@ function collisionDetection() {
           score++;
           if (score === brickRowCount * brickColumnCount) {
             music.bgmusic.stop();
-            alert("Congratulations!! You've won!");
-            alert("Level 2");
-            levelup();
+            location.href = 'https://shauryasrivatava.github.io/Game/level3/';
+            // alert("Congratulations!! You've won!");
+            // alert("Level 2");
+            // levelup();
             brickColumnCount += 7;
             document.location.reload();
           }
@@ -276,8 +277,10 @@ function draw() {
       lives--;
       music.bgmusic.pause();
       if (!lives) {
-        alert("GAME OVER!! Try again...");
-        document.location.reload();
+        location.href = 'https://shauryasrivatava.github.io/Game/gameover/';
+
+        // alert("GAME OVER!! Try again...");
+        // document.location.reload();
       } else {
         music.lift_lost.play();
         alert(`${lives} lives left`);

@@ -276,8 +276,9 @@ function draw() {
       lives--;
       music.bgmusic.pause();
       if (!lives) {
-        alert("GAME OVER!! Try again...");
-        document.location.reload();
+        location.href = 'https://shauryasrivatava.github.io/Game/gameover/';
+        // alert("GAME OVER!! Try again...");
+        // document.location.reload();
       } else {
         music.lift_lost.play();
         alert(`${lives} lives left`);
