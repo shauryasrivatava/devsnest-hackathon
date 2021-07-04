@@ -1,4 +1,4 @@
-    const canvas = document.getElementById("canvas");
+const canvas = document.getElementById("canvas");
     canvas.width = window.innerWidth-60;
     canvas.height = 400;
 
@@ -8,8 +8,8 @@
     context.fillRect(0,0 ,canvas.width, canvas.height);
 
     let draw_color = "black";
-    let draw_width = "2";
     let is_drawing = false;
+    let radius = 2
 
     let restore_array =[];
     let index =-1;
@@ -28,30 +28,28 @@
     canvas.addEventListener("mouseout",stop, false);
 
     function start(event){
-        is_drawing =true;
-        context.beginPath();
-        context.moveTo(event.clientX- canvas.offsetLeft, event.clientY - canvas.offsetTop);
-        event.preventDefault();
+        is_drawing = true
     }
 
     function draw(event){
         if(is_drawing){
-            context.lineTo(event.clientX- canvas.offsetLeft, event.clientY - canvas.offsetTop);
-            context.strokeStyle = draw_color;
-            context.lineWidth = draw_width;
-            context.lineCap = "round";
-            context.lineJoin="round";
-            context.stroke();
+            context.strokeStyle = context.fillStyle = draw_color
+            context.lineTo(event.clientX - canvas.offsetLeft, event.clientY - canvas.offsetTop)
+            context.lineWidth = radius*2
+            context.stroke()
+            context.beginPath()
+            context.arc(event.clientX - canvas.offsetLeft, event.clientY - canvas.offsetTop, radius, 0, Math.PI*2)
+            context.fill()
+            context.beginPath()
+            context.moveTo(event.clientX - canvas.offsetLeft, event.clientY - canvas.offsetTop);
         }
     }
 
     function stop(event){
-        if(is_drawing){
-            context.stroke();
-            context.closePath();
-            is_drawing=false;
+        if (is_drawing){
+            is_drawing = false
+            context.beginPath()
         }
-        event.preventDefault();
         
         if(event.type !='mouseout'){
             restore_array.push(context.getImageData(0,0 ,canvas.width, canvas.height));
