@@ -9,7 +9,7 @@ const canvas = document.getElementById("canvas");
 
     let draw_color = "black";
     let is_drawing = false;
-    let radius = 5
+    let radius = 2
 
     let restore_array =[];
     let index =-1;
