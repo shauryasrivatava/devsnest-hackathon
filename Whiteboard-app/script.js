@@ -29,27 +29,26 @@
 
     function start(event){
         is_drawing =true;
-        context.beginPath();
-        context.moveTo(event.clientX- canvas.offsetLeft, event.clientY - canvas.offsetTop);
-        event.preventDefault();
     }
 
     function draw(event){
         if(is_drawing){
-            context.lineTo(event.clientX- canvas.offsetLeft, event.clientY - canvas.offsetTop);
-            context.strokeStyle = draw_color;
-            context.lineWidth = draw_width;
-            context.lineCap = "round";
-            context.lineJoin="round";
-            context.stroke();
+        ctx.strokeStyle = ctx.fillStyle = draw_color
+        ctx.lineTo(event.clientX - canvas.offsetLeft, event.clientY - canvas.offsetTop)
+        ctx.lineWidth = radius*2
+        ctx.stroke()
+        ctx.beginPath()
+        ctx.arc(event.clientX - canvas.offsetLeft, event.clientY - canvas.offsetTop, radius, 0, Math.PI*2)
+        ctx.fill()
+        ctx.beginPath()
+        ctx.moveTo(event.clientX - canvas.offsetLeft, event.clientY - canvas.offsetTop);
         }
     }
 
     function stop(event){
         if(is_drawing){
-            context.stroke();
-            context.closePath();
-            is_drawing=false;
+            is_drawing = false
+            ctx.beginPath()
         }
         event.preventDefault();
         
