@@ -1,0 +1,239 @@
+@import url("https://fonts.googleapis.com/css2?family=Nunito:wght@300&display=swap");
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Nunito", sans-serif;
+}
+body {
+  overflow: hidden;
+}
+
+::selection {
+  user-select: none;
+}
+
+.container {
+  height: 100vh;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  flex-direction: column;
+
+  /* background: #efffee; */
+}
+
+.btns {
+  text-align: center;
+  min-width: 70%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  /* margin-right: 30px; */
+  /* padding: 10 10px; */
+  border: 1px solid rgb(99, 97, 97);
+  background-color: #fff;
+  padding: 5px 10px;
+  border-radius: 20px;
+  position: absolute;
+  top: 85%;
+  box-shadow: 10px 10px 5px grey;
+}
+
+#canvas {
+  border: 2px solid black;
+  background: #fff;
+  cursor: none;
+  /* margin-bottom: 5%; */
+}
+
+.btns .color {
+  height: 40px;
+  width: 40px;
+  border-radius: 50%;
+  border: 2px solid #fff;
+  cursor: pointer;
+}
+
+.btns button {
+  border: 2px solid white;
+  background: rgb(182, 180, 180);
+  /* color: cornflowerblue; */
+  padding: 4px 8px;
+  /* font-weight: bolder; */
+  border-radius: 5px;
+  transition: 0.3s;
+  height: 50px;
+  width: 50px;
+  font-weight: bolder;
+  border-radius: 5px;
+  transition: 0.3s;
+  cursor: pointer;
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.btns button:hover {
+  background: rgb(95, 95, 94);
+}
+
+.btns .color-picker {
+  border: 2px solid black;
+}
+svg {
+  place-items: center;
+}
+
+.shape-display {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 0.4rem;
+  /* flex-direction: column; */
+  position: absolute;
+  bottom: 100px;
+  right: 100px;
+  border: 1px solid black;
+  border-radius: 0.5rem;
+  /* display: none; */
+}
+
+/* .btn {
+  display: none;
+} */
+.btns button::before {
+  background-color: rgba(146, 146, 146, 0.65);
+  color: white;
+  position: absolute;
+  top: -100%;
+  left: 0;
+  font-size: 1.3rem;
+  padding: 5px;
+  border-radius: 3px;
+  opacity: 0;
+}
+
+.btns button:hover::before {
+  opacity: 1;
+  transition: all 0.5s step-end;
+}
+
+.btns .undo::before {
+  content: "Undo";
+}
+
+.btns .redo::before {
+  content: "Redo";
+}
+
+.btns .clear::before {
+  content: "Clear All";
+  width: 300%;
+}
+
+.btns .pen::before {
+  content: "Pen";
+}
+
+.btns .erase::before {
+  content: "Eraser";
+}
+
+.btns .shape-btn::before {
+  content: "Shapes";
+}
+
+input[type="range"] {
+  cursor: pointer;
+  position: relative;
+}
+
+input[type="range"]::before {
+  background-color: rgba(146, 146, 146, 0.65);
+  content: "Increase size";
+  color: rgb(255, 255, 255);
+  position: absolute;
+  top: -45px;
+  left: 25%;
+  font-size: 1.3rem;
+  padding: 5px;
+  border-radius: 3px;
+  opacity: 0;
+}
+
+input[type="range"]:hover::before {
+  opacity: 1;
+  transition: all 0.5s step-end;
+}
+
+input[type="color"] {
+  -webkit-appearance: none;
+  border: none;
+  width: 32px;
+  height: 32px;
+  cursor: pointer;
+  position: relative;
+}
+
+input[type="color"]::-webkit-color-swatch-wrapper {
+  padding: 0px;
+}
+
+input[type="color"]::-webkit-color-swatch {
+  border: none;
+  /* border-radius: 50%; */
+}
+
+input[type="color"]::before {
+  background-color: rgba(114, 113, 113, 0.65);
+  content: "Background color";
+  color: white;
+  position: absolute;
+  width: 400%;
+  top: -180%;
+  left: -150%;
+  font-size: 1.3rem;
+  padding: 5px;
+  border-radius: 3px;
+  opacity: 0;
+}
+
+input[type="color"]:hover::before {
+  opacity: 1;
+  transition: all 0.5s step-end;
+}
+
+.pencil {
+  position: absolute;
+  top: 0;
+  left: 0;
+  fill: black;
+  opacity: 0;
+  pointer-events: none;
+}
+/* .bg-picker input[type="color"]::before {
+  content: "Background color";
+} */
+
+.circle {
+  position: fixed;
+  display: none;
+  border-radius: 50%;
+  border: 1px dashed black;
+  width: 6px;
+  height: 6px;
+  left: 20px;
+  right: 0;
+  transition: transform 0.2s ease, opacity 0.2s ease, border-color 0.2s ease,
+    background-color 0.2s ease;
+  pointer-events: none;
+  background-color: rgba(230, 210, 210, 0.25);
+  opacity: 0;
+}
+
+.shape-btn {
+  display: none;
+}
