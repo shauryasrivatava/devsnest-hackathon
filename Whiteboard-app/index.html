@@ -11,13 +11,13 @@
     <div class="field">
         <canvas id="canvas"></canvas>
         <div class="tools">
-            <button onclick="undo_last()" type="button" class="button">Undo</button>
-            <button onclick="clear_canvas()" type="button" class="button">Clear</button>
+            <button onClick="undo_last()" type="button" class="button">Undo</button>
+            <button onClick="clear_canvas()" type="button" class="button">Clear</button>
 
-            <!-- <div onclick="change_color(this)" class="color-field" style="background-color: red;"></div>
-            <div onclick="change_color(this)" class="color-field" style="background-color: yellow;"></div>
-            <div onclick="change_color(this)" class="color-field" style="background-color: green;"></div>
-            <div onclick="change_color(this)" class="color-field" style="background-color: blue;"></div> -->
+            <div onClick="change_color('red')" class="color-field" style="background-color: red;"></div>
+            <div onClick="change_color('yellow')" class="color-field" style="background-color: yellow;"></div>
+            <div onClick="change_color('green')" class="color-field" style="background-color: green;"></div>
+            <div onClick="change_color('blue')" class="color-field" style="background-color: blue;"></div>
 
             <input onInput="draw_color = this.value" type="color" class="color-picker">
             <input onInput="radius=this.value" type="range" min="1" max="100" class="pen-range">

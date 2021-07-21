@@ -13,8 +13,8 @@ let paddleWidth = 72;
 let paddleX = (canvas.width - paddleWidth) / 2;
 let rightPressed = false;
 let leftPressed = false;
-let brickRowCount = 4;
-let brickColumnCount = 7;
+let brickRowCount = 3;
+let brickColumnCount = 9;
 let brickWidth = 72;
 let brickHeight = 24;
 let brickPadding = 12;
@@ -23,6 +23,7 @@ let brickOffsetLeft = 30;
 //Create variables to take score
 let score = 0;
 let lives = 3;
+let level = 1;
 
 // bricks colors
 let colors = ["#3E00FD", "#00FDFD", "#FFFF32", "#CEFF03", "#F82888", "#E30303"];
@@ -48,23 +49,9 @@ let music = {
     volume: 0.5,
     autoplay: true,
   }),
-
-  // let bgmusic = {
-  //   m1: new Howl({
-  //     src: ["./sounds/bg2.mp3"],
-  //     volume: 0.5,
-  //     autoplay: true,
-  //   }),
-
-  // m2: new Howl({
-  //   src: ["https://assets.codepen.io/21542/howler-demo-bg-music.mp3"],
-  //   //  autoplay: true
-  // }),
 };
 
 //levelup
-
-
 
 //Creating arrays for the bricks
 let bricks = [];
@@ -102,46 +89,33 @@ function keyUpHandler(e) {
     leftPressed = false;
   }
 }
+//snackbar popup
+function myFunction(lives) {
+  // Get the snackbar DIV
+  var x = document.getElementById("snackbar");
 
-// var paused = false;
-// //pause game
-// window.addEventListener("keydown", pauseGameKeyHandler, false);
+  // Add the "show" class to DIV
+  x.className = "show";
+  x.innerText = `${lives} lives left`;
+  // After 3 seconds, remove the show class from DIV
+  setTimeout(function () {
+    x.className = x.className.replace("show", "");
+  }, 3000);
+}
+//congratulations toast
+function myFunction1() {
+  // Get the snackbar DIV
+  var x = document.getElementById("snackbar");
 
-// function pauseGameKeyHandler(e) {
-//   var keyCode = e.keyCode;
-//   switch (keyCode) {
-//     case 80: //p
-//       togglePause();
-//       break;
-//   }
-// }
-
-// function togglePause() {
-//   paused = !paused;
-//   draw();
-// }
-
-
-// // CREATE THE PADDLE
-// const paddle = {
-//   m : canvas.width/2 - paddleWidth/2,
-//   n : canvas.height - paddleHeight,
-//   width : paddleWidth,
-//   height : paddleHeight,
-//   dx :5
-// }
-
-
-// // CREATE THE BALL
-// const ball = {
-//   m : canvas.width/2,
-//   n : paddle.y - ballRadius,
-//   radius : ballRadius,
-//   speed : 4,
-//   dx : 3 * (Math.random() * 2 - 1),
-//   dy : -3
-// }
-
+  // Add the "show" class to DIV
+  x.className = "show";
+  x.innerText = `Congratulations! You Won 
+  Level 2`;
+  // After 3 seconds, remove the show class from DIV
+  setTimeout(function () {
+    x.className = x.className.replace("show", "");
+  }, 3000);
+}
 
 function drawBall() {
   ctx.beginPath();
@@ -151,11 +125,6 @@ function drawBall() {
   ctx.fill();
   ctx.closePath();
 }
-
-
-
-
-
 //Create a function to create the paddle
 function drawPaddle() {
   ctx.beginPath();
@@ -199,6 +168,14 @@ function drawScore() {
   ctx.fillStyle = "#ffff32";
   ctx.fillText("Score: " + score, 80, 35); //position score at 8,20 on the x,y axis of the canvas
 }
+//current level
+function drawLevels() {
+  var img4 = document.getElementById("levels");
+  ctx.drawImage(img4, 320, 15);
+  ctx.font = "20px monospace";
+  ctx.fillStyle = "#00fdfd";
+  ctx.fillText("Level: 1", 350, 35);
+}
 //no.of lives remaining
 function drawLives() {
   var img1 = document.getElementById("heart");
@@ -226,33 +203,45 @@ function collisionDetection() {
           b.status = 0;
           score++;
           if (score === brickRowCount * brickColumnCount) {
-            music.bgmusic.stop();
-            alert("Congratulations!! You've won!");
-            location.href = 'https://shauryasrivatava.github.io/Game/level2/';
+            // music.bgmusic.stop();
+            myFunction1();
+
+            // alert("Congratulations!! You've won!");
+            setTimeout(function () {
+              location.href = "https://yashvi30.github.io/Brick-Game/level2/";
+            }, 30);
             // brickColumnCount += 7;
-            
           }
         }
       }
     }
   }
 }
+
+unmute.addEventListener("click", (e) => {
+  // if (!music.bgmusic.playing()) {
+  music.bgmusic.play();
+  music.bgmusic.loop = true;
+  unmute.style.display = "none";
+  mute.style.display = "block";
+  // unmute.hidden = true;
+  // mute.hidden = false;
+  // unmute.classList.toggle("unmute");
+  // }
+});
+//music mute unmute
+mute.addEventListener("click", (e) => {
+  music.bgmusic.pause();
+  unmute.style.display = "block";
+  mute.style.display = "none";
+  // mute.hidden = true;
+  // unmute.hidden = false;
+});
 function draw() {
   ctx.clearRect(0, 0, canvas.width, canvas.height);
-  unmute.addEventListener("click", (e) => {
-    if (!music.bgmusic.playing()) {
-      music.bgmusic.play();
-      unmute.hidden = true;
-      mute.hidden = false;
-    }
-  });
-  //music mute unmute
-  mute.addEventListener("click", (e) => {
-    music.bgmusic.pause();
-    mute.hidden = true;
-    unmute.hidden = false;
-  });
+
   drawScore();
+  drawLevels();
   drawLives();
   drawBricks();
   drawBall();
@@ -274,16 +263,18 @@ function draw() {
     //if no paddle hit, body of canvas is hit ==> game over
     else {
       lives--;
-      music.bgmusic.pause();
+      // music.bgmusic.pause();
       if (!lives) {
-        location.href = 'https://shauryasrivatava.github.io/Game/gameover/';
-        console.log("GAME OVER!! Try again...");
+        location.href = "https://yashvi30.github.io/Brick-Game/gameover/";
+        // console.log("GAME OVER!! Try again...");
         // document.location.reload();
       } else {
         music.lift_lost.play();
-        alert(`${lives} lives left`);
+        myFunction(lives);
+        console.log("gdiugdwu");
+        // alert(`${lives} lives left`);
       }
-      music.bgmusic.play();
+      // music.bgmusic.play();
     }
   }
 

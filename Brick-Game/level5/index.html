@@ -8,23 +8,24 @@
     <link rel="stylesheet" href="styles.css" />
   </head>
   <body>
-    <!-- <audio src="./sounds/bg2.mp3"></audio> -->
     <div class="game-container">
-      <canvas id="brickcanvas" height="524" width="630"></canvas>
+      <canvas id="brickcanvas" height="600" width="890"></canvas>
       <img
         src="./images/heart 1 (1).png"
         alt="Lives"
         id="heart"
         class="extra"
       />
+      <img src="./images/arrow-up 1.png" alt="L" id="levels" class="extra" />
       <img src="./images/trophy 1 (1).png" alt="W" id="trophy" class="extra" />
       <div class="icons">
         <button>
-          <img src="./images/mute.png" alt="mute" id="mute" />
           <img src="./images/unmute.png" alt="unmute" id="unmute" />
+          <img src="./images/mute.png" alt="mute" id="mute" />
         </button>
       </div>
     </div>
+    <div id="snackbar"></div>
     <!-- <img src="./images/_Group1.png" alt="------" id="board" /> -->
     <script
       src="https://cdnjs.cloudflare.com/ajax/libs/howler/2.2.1/howler.min.js"

@@ -15,7 +15,10 @@ const canvas = document.getElementById("canvas");
     let index =-1;
 
     function change_color(element){
-        draw_color= element.style.background;
+        console.log("happy");
+        // draw_color= element.style.background_color;
+        draw_color= element;
+        
     }
 
     canvas.addEventListener("touchstart",start, false);

@@ -5,7 +5,7 @@ let ballRadius = 10;
 let x = canvas.width / 2;
 let y = canvas.height - 10;
 let dx = 4;
-let dy = -4;
+let dy = -2;
 //create the paddle
 let paddleHeight = 12;
 let paddleWidth = 72;
@@ -13,8 +13,8 @@ let paddleWidth = 72;
 let paddleX = (canvas.width - paddleWidth) / 2;
 let rightPressed = false;
 let leftPressed = false;
-let brickRowCount = 8;
-let brickColumnCount = 7;
+let brickRowCount = 6;
+let brickColumnCount = 10;
 let brickWidth = 72;
 let brickHeight = 24;
 let brickPadding = 12;
@@ -62,8 +62,7 @@ let music = {
   // }),
 };
 
-
-
+//levelup
 
 //Creating arrays for the bricks
 let bricks = [];
@@ -101,60 +100,42 @@ function keyUpHandler(e) {
     leftPressed = false;
   }
 }
+//snackbar popup
+function myFunction(lives) {
+  // Get the snackbar DIV
+  var x = document.getElementById("snackbar");
 
-// var paused = false;
-// //pause game
-// window.addEventListener("keydown", pauseGameKeyHandler, false);
+  // Add the "show" class to DIV
+  x.className = "show";
+  x.innerText = `${lives} lives left`;
+  // After 3 seconds, remove the show class from DIV
+  setTimeout(function () {
+    x.className = x.className.replace("show", "");
+  }, 3000);
+}
 
-// function pauseGameKeyHandler(e) {
-//   var keyCode = e.keyCode;
-//   switch (keyCode) {
-//     case 80: //p
-//       togglePause();
-//       break;
-//   }
-// }
+function myFunction1() {
+  // Get the snackbar DIV
+  var x = document.getElementById("snackbar");
 
-// function togglePause() {
-//   paused = !paused;
-//   draw();
-// }
-
-
-// // CREATE THE PADDLE
-// const paddle = {
-//   m : canvas.width/2 - paddleWidth/2,
-//   n : canvas.height - paddleHeight,
-//   width : paddleWidth,
-//   height : paddleHeight,
-//   dx :5
-// }
-
-
-// // CREATE THE BALL
-// const ball = {
-//   m : canvas.width/2,
-//   n : paddle.y - ballRadius,
-//   radius : ballRadius,
-//   speed : 4,
-//   dx : 3 * (Math.random() * 2 - 1),
-//   dy : -3
-// }
-
+  // Add the "show" class to DIV
+  x.className = "show";
+  x.innerText = `Congratulations! You Won 
+  Level 2`;
+  // After 3 seconds, remove the show class from DIV
+  setTimeout(function () {
+    x.className = x.className.replace("show", "");
+  }, 3000);
+}
 
 function drawBall() {
   ctx.beginPath();
-  ctx.arc(x,y, ballRadius, 0, Math.PI * 2); //centered at (x,y) position with radius r = ballRadius starting at 0 = startAngle, ending at Math.PI*2 = endAngle (in Radians)
+  ctx.arc(x, y, ballRadius, 0, Math.PI * 2); //centered at (x,y) position with radius r = ballRadius starting at 0 = startAngle, ending at Math.PI*2 = endAngle (in Radians)
   ctx.fillStyle = "red";
   ctx.shadowColor = "red";
   ctx.fill();
   ctx.closePath();
 }
-
-
-
-
-
 //Create a function to create the paddle
 function drawPaddle() {
   ctx.beginPath();
@@ -198,6 +179,16 @@ function drawScore() {
   ctx.fillStyle = "#ffff32";
   ctx.fillText("Score: " + score, 80, 35); //position score at 8,20 on the x,y axis of the canvas
 }
+
+//current level
+function drawLevels() {
+  var img4 = document.getElementById("levels");
+  ctx.drawImage(img4, 340, 15);
+  ctx.font = "20px monospace";
+  ctx.fillStyle = "#00fdfd";
+  ctx.fillText("Level: 5", 370, 35);
+}
+
 //no.of lives remaining
 function drawLives() {
   var img1 = document.getElementById("heart");
@@ -225,36 +216,43 @@ function collisionDetection() {
           b.status = 0;
           score++;
           if (score === brickRowCount * brickColumnCount) {
-            music.bgmusic.stop();
-            alert("Congratulations!! You've won!");
-            location.href = 'https://shauryasrivatava.github.io/Game/level3/';
-            
-            // alert("Level 2");
-            // levelup();
-            brickColumnCount += 7;
-            
+            // music.bgmusic.stop();
+            // alert("Congratulations!! You've won!");
+            setTimeout(function () {
+              location.href =
+                "https://yashvi30.github.io/Brick-Game/score card/";
+            }, 30);
+            // brickColumnCount += 7;
           }
         }
       }
     }
   }
 }
+
+unmute.addEventListener("click", (e) => {
+  // if (!music.bgmusic.playing()) {
+  music.bgmusic.play();
+  unmute.style.display = "none";
+  mute.style.display = "block";
+  // unmute.hidden = true;
+  // mute.hidden = false;
+  // unmute.classList.toggle("unmute");
+  // }
+});
+//music mute unmute
+mute.addEventListener("click", (e) => {
+  music.bgmusic.pause();
+  unmute.style.display = "block";
+  mute.style.display = "none";
+  // mute.hidden = true;
+  // unmute.hidden = false;
+});
 function draw() {
   ctx.clearRect(0, 0, canvas.width, canvas.height);
-  unmute.addEventListener("click", (e) => {
-    if (!music.bgmusic.playing()) {
-      music.bgmusic.play();
-      unmute.hidden = true;
-      mute.hidden = false;
-    }
-  });
-  //music mute unmute
-  mute.addEventListener("click", (e) => {
-    music.bgmusic.pause();
-    mute.hidden = true;
-    unmute.hidden = false;
-  });
+
   drawScore();
+  drawLevels();
   drawLives();
   drawBricks();
   drawBall();
@@ -276,17 +274,18 @@ function draw() {
     //if no paddle hit, body of canvas is hit ==> game over
     else {
       lives--;
-      music.bgmusic.pause();
+      // music.bgmusic.pause();
       if (!lives) {
-        location.href = 'https://shauryasrivatava.github.io/Game/gameover/';
-
-        // alert("GAME OVER!! Try again...");
+        location.href = "https://yashvi30.github.io/Brick-Game/gameover/";
+        // console.log("GAME OVER!! Try again...");
         // document.location.reload();
       } else {
         music.lift_lost.play();
-        alert(`${lives} lives left`);
+        myFunction(lives);
+        console.log("gdiugdwu");
+        // alert(`${lives} lives left`);
       }
-      music.bgmusic.play();
+      // music.bgmusic.play();
     }
   }
 
